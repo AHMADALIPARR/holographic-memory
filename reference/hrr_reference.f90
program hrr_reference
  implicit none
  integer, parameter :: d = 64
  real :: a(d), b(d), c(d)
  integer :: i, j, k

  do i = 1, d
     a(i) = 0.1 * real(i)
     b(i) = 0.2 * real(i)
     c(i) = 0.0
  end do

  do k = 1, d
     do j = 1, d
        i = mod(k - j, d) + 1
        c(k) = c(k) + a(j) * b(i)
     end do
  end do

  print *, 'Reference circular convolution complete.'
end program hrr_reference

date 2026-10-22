@@ -1,0 +1,28 @@
+formal/Convolution.lean
+import Mathlib
+
+open scoped BigOperators
+
+namespace Hrr
+
+/-- The circular convolution is defined over an index-shifted finite sum. -/
+def circConv (a b : Fin d → ℝ) : Fin d → ℝ :=
+  fun k => ∑ j : Fin d, a j * b (k - j)
+
+/-- Circular correlation is the approximate inverse used for unbinding. -/
+def circCorr (a b : Fin d → ℝ) : Fin d → ℝ :=
+  fun k => ∑ j : Fin d, a j * b (j + k)
+
+/-- A simple algebraic statement: convolution distributes over addition. -/
+example (a b c : Fin d → ℝ) :
+    circConv a (b + c) = circConv a b + circConv a c := by
+  funext k
+  simp [circConv, Finset.mul_sum, Finset.sum_add_distrib, add_mul]
+
+/-- Correlation is linear in the second argument. -/
+example (a b c : Fin d → ℝ) :
+    circCorr a (b + c) = circCorr a b + circCorr a c := by
+  funext k
+  simp [circCorr, Finset.mul_sum, Finset.sum_add_distrib, add_mul]
+
+end Hrr

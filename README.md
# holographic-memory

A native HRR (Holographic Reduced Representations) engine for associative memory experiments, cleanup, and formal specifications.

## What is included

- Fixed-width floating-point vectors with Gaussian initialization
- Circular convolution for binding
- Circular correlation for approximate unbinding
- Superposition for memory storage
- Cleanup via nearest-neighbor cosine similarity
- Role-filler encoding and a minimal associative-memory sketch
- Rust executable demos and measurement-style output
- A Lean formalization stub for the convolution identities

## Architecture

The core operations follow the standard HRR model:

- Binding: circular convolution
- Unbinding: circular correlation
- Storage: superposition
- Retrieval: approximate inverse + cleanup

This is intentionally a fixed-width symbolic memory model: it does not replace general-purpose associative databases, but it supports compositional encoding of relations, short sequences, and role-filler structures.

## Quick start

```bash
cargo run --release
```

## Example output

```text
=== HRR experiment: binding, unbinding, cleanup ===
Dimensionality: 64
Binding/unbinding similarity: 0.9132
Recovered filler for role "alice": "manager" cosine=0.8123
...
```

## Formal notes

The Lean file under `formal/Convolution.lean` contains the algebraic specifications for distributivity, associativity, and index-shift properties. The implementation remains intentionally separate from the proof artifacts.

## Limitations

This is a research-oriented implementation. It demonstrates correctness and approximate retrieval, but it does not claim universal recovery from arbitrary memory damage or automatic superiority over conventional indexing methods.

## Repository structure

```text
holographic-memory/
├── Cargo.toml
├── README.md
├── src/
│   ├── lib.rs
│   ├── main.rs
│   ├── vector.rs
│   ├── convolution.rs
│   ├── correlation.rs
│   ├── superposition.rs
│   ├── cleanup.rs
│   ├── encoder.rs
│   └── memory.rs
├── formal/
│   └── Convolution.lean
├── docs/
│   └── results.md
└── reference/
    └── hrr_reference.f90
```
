@@ -1,0 +1,38 @@
+use crate::{cleanup_nearest_neighbor, circular_convolution, circular_correlation, superimpose, Vector};
+
+pub struct Memory {
+    dim: usize,
+    bindings: Vec<Vector>,
+}
+
+impl Memory {
+    pub fn new(dim: usize) -> Self {
+        Self {
+            dim,
+            bindings: Vec::new(),
+        }
+    }
+
+    pub fn store_role_filler(&mut self, role: &Vector, filler: &Vector) {
+        assert_eq!(role.len(), self.dim);
+        assert_eq!(filler.len(), self.dim);
+        self.bindings.push(bind_role_filler(role, filler));
+    }
+
+    pub fn recover_filler(&self, role: &Vector, codebook: &[Vector]) -> (String, f64) {
+        let mut memory_state = vec![0.0; self.dim];
+        for bound in &self.bindings {
+            for (idx, value) in bound.values.iter().enumerate() {
+                memory_state[idx] += value;
+            }
+        }
+
+        let retrieved = circular_correlation(&role.values, &memory_state);
+        let recovered = Vector::from_values(retrieved);
+        cleanup_nearest_neighbor(&recovered, codebook)
+    }
+}
+
+fn bind_role_filler(role: &Vector, filler: &Vector) -> Vector {
+    Vector::from_values(circular_convolution(&role.values, &filler.values))
+}

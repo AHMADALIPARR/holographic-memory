@@ -19,5 +19,5 @@ pub fn encode_sequence(sequence: &[Vector]) -> Vec<f64> {
 }
 
 pub fn symbol_codebook(names: &[String], dim: usize) -> Vec<Vector> {
-    names.iter().map(|name| crate::vector::symbol_codebook(&[name.clone()], dim)[0].clone()).collect()
+    names.iter().map(|name| crate::vector::generate_symbol(name, dim)).collect()
 }

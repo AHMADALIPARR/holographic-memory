@@ -57,7 +57,7 @@ pub fn symbol_codebook(names: &[String], dim: usize) -> Vec<Vector> {
     names.iter().map(|name| generate_symbol(name, dim)).collect()
 }
 
-fn generate_symbol(name: &str, dim: usize) -> Vector {
+pub fn generate_symbol(name: &str, dim: usize) -> Vector {
     let mut seed = 0u64;
     for byte in name.as_bytes() {
         seed = seed.wrapping_mul(131).wrapping_add(*byte as u64);

@@ -1,36 +1,34 @@
-use crate::{circular_convolution, Vector};
+use crate::{bind_role_filler, cleanup_nearest_neighbor, circular_convolution, Vector};
 
-pub fn bind_role_filler(role: &Vector, filler: &Vector) -> Vector {
-    Vector::from_values(circular_convolution(&role.values, &filler.values))
+pub struct Memory {
+    dim: usize,
+    bindings: Vec<Vector>,
 }
 
-pub fn encode_sequence(sequence: &[Vector]) -> Vec<f64> {
-    if sequence.is_empty() {
-        return vec![];
-    }
-
-    let dim = sequence[0].len();
-    let mut accumulated = vec![0.0; dim];
-    for item in sequence {
-        assert_eq!(item.len(), dim);
-        for (idx, value) in item.values.iter().enumerate() {
-            accumulated[idx] += value;
+impl Memory {
+    pub fn new(dim: usize) -> Self {
+        Self {
+            dim,
+            bindings: Vec::new(),
         }
     }
-    accumulated
-}
 
-pub fn make_symbol_codebook(symbols: Vec<String>, dim: usize) -> Vec<Vector> {
-    use rand::Rng;
-    let mut rng = rand::thread_rng();
-    symbols
-        .into_iter()
-        .map(|_| {
-            let mut values = Vec::with_capacity(dim);
-            for _ in 0..dim {
-                values.push(rng.gen::<f64>() * 0.7071067811865476);
+    pub fn store_role_filler(&mut self, role: &Vector, filler: &Vector) {
+        assert_eq!(role.len(), self.dim);
+        assert_eq!(filler.len(), self.dim);
+        self.bindings.push(bind_role_filler(role, filler));
+    }
+
+    pub fn recover_filler(&self, role: &Vector, codebook: &[Vector]) -> (String, f64) {
+        let mut superposed = vec![0.0; self.dim];
+        for binding in &self.bindings {
+            for (idx, value) in binding.values.iter().enumerate() {
+                superposed[idx] += value;
             }
-            Vector::from_values(values)
-        })
-        .collect()
+        }
+
+        let recovered = crate::circular_correlation(&role.values, &superposed);
+        let probe = Vector::from_values(recovered);
+        cleanup_nearest_neighbor(&probe, codebook)
+    }
 }

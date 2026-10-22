@@ -1,31 +1,27 @@
-use crate::{cosine_similarity, Vector};
+use crate::{bind_role_filler, circular_convolution, Vector};
 
-pub fn cleanup_nearest_neighbor(target: &Vector, codebook: &[Vector]) -> (String, f64) {
-    let mut best_index = 0usize;
-    let mut best_score = f64::NEG_INFINITY;
-
-    for (idx, candidate) in codebook.iter().enumerate() {
-        let score = cosine_similarity(&target.values, &candidate.values);
-        if score > best_score {
-            best_score = score;
-            best_index = idx;
-        }
-    }
-
-    (format!("symbol_{}", best_index), best_score)
+pub fn make_symbol_codebook(symbols: Vec<String>, dim: usize) -> Vec<Vector> {
+    symbols
+        .into_iter()
+        .map(|name| crate::vector::symbol_vector(&name, dim))
+        .collect()
 }
 
-pub fn cleanup_nearest_neighbor_index(target: &Vector, codebook: &[Vector]) -> (usize, f64) {
-    let mut best_index = 0usize;
-    let mut best_score = f64::NEG_INFINITY;
+pub fn symbol_vector(name: &str, dim: usize) -> Vector {
+    crate::vector::symbol_vector(name, dim)
+}
 
-    for (idx, candidate) in codebook.iter().enumerate() {
-        let score = cosine_similarity(&target.values, &candidate.values);
-        if score > best_score {
-            best_score = score;
-            best_index = idx;
+pub fn encode_sequence(sequence: &[Vector]) -> Vec<f64> {
+    if sequence.is_empty() {
+        return vec![];
+    }
+    let dim = sequence[0].len();
+    let mut acc = vec![0.0; dim];
+    for vector in sequence {
+        assert_eq!(vector.len(), dim);
+        for (idx, value) in vector.values.iter().enumerate() {
+            acc[idx] += value;
         }
     }
-
-    (best_index, best_score)
+    acc
 }

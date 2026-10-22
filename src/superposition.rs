@@ -1,39 +1,16 @@
-use crate::Vector;
+use crate::{cosine_similarity, Vector};
 
-pub fn circular_convolution(left: &[f64], right: &[f64]) -> Vec<f64> {
-    assert_eq!(left.len(), right.len());
-    let dim = left.len();
-    let mut result = vec![0.0; dim];
-
-    for k in 0..dim {
-        let mut acc = 0.0;
-        for j in 0..dim {
-            let index = (k - j + dim) % dim;
-            acc += left[j] * right[index];
-        }
-        result[k] = acc;
+pub fn superimpose(vectors: &[Vector]) -> Vector {
+    if vectors.is_empty() {
+        return Vector::new(0);
     }
-
-    result
-}
-
-pub fn circular_correlation(left: &[f64], right: &[f64]) -> Vec<f64> {
-    assert_eq!(left.len(), right.len());
-    let dim = left.len();
-    let mut result = vec![0.0; dim];
-
-    for k in 0..dim {
-        let mut acc = 0.0;
-        for j in 0..dim {
-            let index = (j + k) % dim;
-            acc += left[j] * right[index];
+    let dim = vectors[0].len();
+    let mut acc = vec![0.0; dim];
+    for vector in vectors {
+        assert_eq!(vector.len(), dim);
+        for (idx, value) in vector.values.iter().enumerate() {
+            acc[idx] += value;
         }
-        result[k] = acc;
     }
-
-    result
-}
-
-pub fn bind_role_filler(role: &Vector, filler: &Vector) -> Vector {
-    Vector::from_values(circular_convolution(&role.values, &filler.values))
+    Vector::from_values(acc)
 }

@@ -1,16 +1,10 @@
 use holographic_memory::{
-    cleanup_nearest_neighbor,
-    circular_convolution,
-    circular_correlation,
-    cosine_similarity,
-    encode_sequence,
-    symbol_codebook,
-    Memory,
-    Vector,
+    cleanup_nearest_neighbor, circular_convolution, circular_correlation, cosine_similarity,
+    encode_sequence, symbol_codebook, Memory, Vector,
 };
 
 #[test]
-fn circular_convolution_matches_definition() {
+fn convolution_matches_definition() {
     let a = vec![1.0, 2.0, 3.0];
     let b = vec![4.0, 5.0, 6.0];
     let actual = circular_convolution(&a, &b);
@@ -47,16 +41,19 @@ fn cleanup_finds_best_match() {
 }
 
 #[test]
-fn sequence_encoding_has_expected_length() {
+fn sequence_encoding_keeps_vector_length() {
     let dim = 16usize;
-    let seq = vec![Vector::from_values(vec![1.0; dim]), Vector::from_values(vec![2.0; dim])];
+    let seq = vec![
+        Vector::from_values(vec![1.0; dim]),
+        Vector::from_values(vec![2.0; dim]),
+    ];
     let encoded = encode_sequence(&seq);
     assert_eq!(encoded.len(), dim);
     assert_eq!(encoded[0], 3.0);
 }
 
 #[test]
-fn memory_retrieve_returns_result() {
+fn memory_retrieval_returns_a_symbol() {
     let dim = 64usize;
     let names = vec!["role".to_string(), "value".to_string(), "other".to_string()];
     let codebook = symbol_codebook(&names, dim);

@@ -1,3 +1,3 @@
 # CUDA notes
 
-This directory is reserved for optional CUDA/PTX experiments and kernels.
+The CUDA directory is reserved for optional PTX/CUDA acceleration experiments.

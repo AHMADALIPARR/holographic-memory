@@ -50,11 +50,11 @@ fn fft(values: &[f64]) -> Vec<Complex> {
         let wlen = Complex::new(angle.cos(), angle.sin());
         for i in (0..n).step_by(len) {
             let mut w = Complex::new(1.0, 0.0);
-            for j in 0..(len / 2) {
-                let u = a[i + j];
-                let v = a[i + j + len / 2].mul(w);
-                a[i + j] = u.add(v);
-                a[i + j + len / 2] = u.sub(v);
+            for k in 0..(len / 2) {
+                let u = a[i + k];
+                let v = a[i + k + len / 2].mul(w);
+                a[i + k] = u.add(v);
+                a[i + k + len / 2] = u.sub(v);
                 w = w.mul(wlen);
             }
         }
@@ -87,11 +87,11 @@ fn ifft(values: &[Complex]) -> Vec<f64> {
         let wlen = Complex::new(angle.cos(), angle.sin());
         for i in (0..n).step_by(len) {
             let mut w = Complex::new(1.0, 0.0);
-            for j in 0..(len / 2) {
-                let u = a[i + j];
-                let v = a[i + j + len / 2].mul(w);
-                a[i + j] = u.add(v);
-                a[i + j + len / 2] = u.sub(v);
+            for k in 0..(len / 2) {
+                let u = a[i + k];
+                let v = a[i + k + len / 2].mul(w);
+                a[i + k] = u.add(v);
+                a[i + k + len / 2] = u.sub(v);
                 w = w.mul(wlen);
             }
         }
@@ -140,7 +140,7 @@ pub fn circular_correlation(a: &[f64], b: &[f64]) -> Vec<f64> {
 pub fn convolution_fft(a: &[f64], b: &[f64]) -> Vec<f64> {
     assert_eq!(a.len(), b.len());
     let n = a.len();
-    assert!(n.is_power_of_two(), "FFT requires power-of-two vector length");
+    assert!(n.is_power_of_two(), "FFT convolution requires power-of-two length");
 
     let fa = fft(a);
     let fb = fft(b);

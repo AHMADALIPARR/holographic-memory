@@ -1,3 +1,3 @@
-# Example outputs
+# Examples
 
-These examples document the demo executable output and reproducible behavior.
+This directory contains example transcripts and demonstration artifacts.

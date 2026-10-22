@@ -1,3 +1,3 @@
 # Documentation
 
-This directory holds design notes, experiment summaries, and result descriptions.
+This directory contains design notes and experiment summaries.

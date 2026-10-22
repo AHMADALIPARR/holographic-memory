@@ -1,3 +1,3 @@
 # Benchmarks
 
-This directory contains benchmark notes, CSV output, and timing scripts.
+This directory is reserved for benchmark scripts, timing logs, and measurement harnesses.

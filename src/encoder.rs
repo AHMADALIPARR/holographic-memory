@@ -1,4 +1,4 @@
-use crate::Vector;
+use crate::{generate_symbol, Vector};
 
 pub fn encode_sequence(sequence: &[Vector]) -> Vec<f64> {
     if sequence.is_empty() {
@@ -19,5 +19,5 @@ pub fn encode_sequence(sequence: &[Vector]) -> Vec<f64> {
 }
 
 pub fn symbol_codebook(names: &[String], dim: usize) -> Vec<Vector> {
-    names.iter().map(|name| crate::vector::generate_symbol(name, dim)).collect()
+    names.iter().map(|name| generate_symbol(name, dim)).collect()
 }

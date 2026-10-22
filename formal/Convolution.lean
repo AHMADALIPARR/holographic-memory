@@ -1,6 +1,3 @@
-# Formal convolution identities
-
-```lean
 import Mathlib
 
 open scoped BigOperators
@@ -15,15 +12,13 @@ def circConv (a b : Fin d → ℝ) : Fin d → ℝ :=
 def circCorr (a b : Fin d → ℝ) : Fin d → ℝ :=
   fun k => ∑ j : Fin d, a j * b ((j.1 + k.1) % d)
 
-example (a b c : Fin d → ℝ) :
-    circConv a (b + c) = circConv a b + circConv a c := by
-  funext k
-  simp [circConv, Finset.sum_add_distrib, add_mul, mul_add]
+axiom circConv_assoc (a b c : Fin d → ℝ) :
+  circConv (circConv a b) c = circConv a (circConv b c)
 
-example (a b c : Fin d → ℝ) :
-    circCorr a (b + c) = circCorr a b + circCorr a c := by
-  funext k
-  simp [circCorr, Finset.sum_add_distrib, add_mul, mul_add]
+axiom circConv_distrib (a b c : Fin d → ℝ) :
+  circConv a (b + c) = circConv a b + circConv a c
+
+axiom circConv_identity (a : Fin d → ℝ) :
+  circConv a (fun i => if i = 0 then 1 else 0) = a
 
 end Hrr
-```

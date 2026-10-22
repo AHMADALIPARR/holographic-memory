@@ -1,13 +1,15 @@
-use rand::Rng;
+use std::f64::consts::PI;
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq)]
 pub struct Vector {
     pub values: Vec<f64>,
 }
 
 impl Vector {
     pub fn new(dim: usize) -> Self {
-        Self { values: vec![0.0; dim] }
+        Self {
+            values: vec![0.0; dim],
+        }
     }
 
     pub fn from_values(values: Vec<f64>) -> Self {
@@ -31,7 +33,16 @@ impl Vector {
     }
 
     pub fn norm(&self) -> f64 {
-        self.values.iter().map(|v| v * v).sum::<f64>().sqrt()
+        self.values.iter().map(|value| value * value).sum::<f64>().sqrt()
+    }
+
+    pub fn cosine_similarity(&self, other: &Self) -> f64 {
+        let denom = self.norm() * other.norm();
+        if denom == 0.0 {
+            0.0
+        } else {
+            self.dot(other) / denom
+        }
     }
 
     pub fn len(&self) -> usize {
@@ -41,20 +52,14 @@ impl Vector {
 
 pub fn cosine_similarity(left: &[f64], right: &[f64]) -> f64 {
     assert_eq!(left.len(), right.len());
-
     let dot = left.iter().zip(right.iter()).map(|(a, b)| a * b).sum::<f64>();
-    let left_norm = left.iter().map(|v| v * v).sum::<f64>().sqrt();
-    let right_norm = right.iter().map(|v| v * v).sum::<f64>().sqrt();
-
+    let left_norm = left.iter().map(|value| value * value).sum::<f64>().sqrt();
+    let right_norm = right.iter().map(|value| value * value).sum::<f64>().sqrt();
     if left_norm == 0.0 || right_norm == 0.0 {
         0.0
     } else {
         dot / (left_norm * right_norm)
     }
-}
-
-pub fn symbol_codebook(names: &[String], dim: usize) -> Vec<Vector> {
-    names.iter().map(|name| generate_symbol(name, dim)).collect()
 }
 
 pub fn generate_symbol(name: &str, dim: usize) -> Vector {
@@ -68,9 +73,23 @@ pub fn generate_symbol(name: &str, dim: usize) -> Vector {
         .map(|_| {
             let u1: f64 = rng.gen();
             let u2: f64 = rng.gen();
-            let r = (-2.0 * u1.ln()).sqrt();
-            let theta = 2.0 * std::f64::consts::PI * u2;
-            (r * theta.cos()) / (dim as f64).sqrt()
+            let radius = (-2.0 * u1.ln()).sqrt();
+            let theta = 2.0 * PI * u2;
+            (radius * theta.cos()) / (dim as f64).sqrt()
+        })
+        .collect();
+    Vector { values }
+}
+
+pub fn random_vector(dim: usize, seed: u64) -> Vector {
+    let mut rng = rand::rngs::StdRng::seed_from_u64(seed);
+    let values: Vec<f64> = (0..dim)
+        .map(|_| {
+            let u1: f64 = rng.gen();
+            let u2: f64 = rng.gen();
+            let radius = (-2.0 * u1.ln()).sqrt();
+            let theta = 2.0 * PI * u2;
+            (radius * theta.cos()) / (dim as f64).sqrt()
         })
         .collect();
     Vector { values }

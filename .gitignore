@@ -2,3 +2,8 @@
 /target/
 **/*.rs.bk
 Cargo.lock
+
+# HYDRA build artifacts (Fortran/Ada)
+*.mod
+*.o
+*.ali

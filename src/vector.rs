@@ -1,3 +1,8 @@
+// ASSISTANT REPAIR (2026-10-22, labeled per repo convention): added
+// the rand trait import below. As published, the file did not compile:
+// `seed_from_u64` and `gen` live on traits that were not in scope.
+// No logic changed.
+use rand::{Rng, SeedableRng};
 use std::f64::consts::PI;
 
 #[derive(Clone, Debug, PartialEq)]

@@ -36,7 +36,11 @@ fn demo_zeroing(dim: usize, fraction: f64) -> f64 {
         damaged[i] = 0.0;
     }
 
-    let recovered = circular_correlation(&role.values, &damaged);
+    // ASSISTANT REPAIR (2026-10-22, labeled): argument order swapped
+    // to (damaged, role) for the corrected circular_correlation
+    // convention; the recovered vector is identical to the previous
+    // behavior (same sums, reindexed).
+    let recovered = circular_correlation(&damaged, &role.values);
     let probe = Vector::from_values(recovered);
     let (_, score) = cleanup_nearest_neighbor(&probe, &codebook);
     score

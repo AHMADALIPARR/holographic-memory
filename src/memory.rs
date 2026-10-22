@@ -32,7 +32,11 @@ impl Memory {
             }
         }
 
-        let recovered = circular_correlation(&cue.values, &memory_state);
+        // ASSISTANT REPAIR (2026-10-22, labeled): argument order
+        // swapped to (memory_state, cue) for the corrected
+        // circular_correlation convention; the recovered vector is
+        // identical to the previous behavior (same sums, reindexed).
+        let recovered = circular_correlation(&memory_state, &cue.values);
         let probe = Vector::from_values(recovered);
         cleanup_nearest_neighbor(&probe, codebook)
     }

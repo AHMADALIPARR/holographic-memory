@@ -1,0 +1,7 @@
+HYDRA Ada/SPARK control demo (GNAT 13.3.0, -gnata contracts on, 2026-10-22)
+fresh challenge accepted:   TRUE
+replayed challenge rejected:TRUE
+second challenge accepted:  TRUE
+nonce 1 issued:TRUE value 1
+nonce 2 issued:TRUE value 2
+exhaustion: issuedFALSE, state REKEY_REQUIRED

@@ -1,6 +1,0 @@
-src/correlation.rs
-use crate::{circular_correlation, Vector};
-
-pub fn correlation_inverse(left: &Vector, right: &Vector) -> Vector {
-    Vector::from_values(circular_correlation(&left.values, &right.values))
-}

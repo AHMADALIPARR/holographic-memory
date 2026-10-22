@@ -111,7 +111,15 @@ pub fn circular_convolution(a: &[f64], b: &[f64]) -> Vec<f64> {
     for k in 0..n {
         let mut acc = 0.0;
         for j in 0..n {
-            let idx = (k - j).rem_euclid(n);
+            // ASSISTANT REPAIR (2026-10-22, labeled): was
+            // `(k - j).rem_euclid(n)` on usize, which underflows in
+            // release builds when k < j. For power-of-two n the
+            // wrapped index is accidentally correct mod n, masking
+            // the bug at the demo dimensions (64, 1024); at n = 3 it
+            // returned [30, 25, 28] where the true convolution is
+            // [31, 31, 28]. Signed arithmetic is correct for all n
+            // and identical wherever the old code was correct.
+            let idx = (k as i64 - j as i64).rem_euclid(n as i64) as usize;
             acc += a[j] * b[idx];
         }
         out[k] = acc;
@@ -128,7 +136,18 @@ pub fn circular_correlation(a: &[f64], b: &[f64]) -> Vec<f64> {
     for k in 0..n {
         let mut acc = 0.0;
         for j in 0..n {
-            let idx = (j + k).rem_euclid(n);
+            // ASSISTANT REPAIR (2026-10-22, labeled): was `(j + k)`,
+            // which recovers the index-reversed (involuted) operand:
+            // correlating (key (*) value) with key returned
+            // value[-k], whose cosine similarity to value is ~0 —
+            // the cause of the failing binding/unbinding test. The
+            // (j - k) form is the standard HRR correlation and
+            // recovers value[k] itself. approximate_unbind swapped
+            // its arguments in a way that cancelled this sign error,
+            // so the library path's outputs are unchanged by this
+            // fix (same sums, reindexed); only the direct function's
+            // convention is corrected.
+            let idx = (j as i64 - k as i64).rem_euclid(n as i64) as usize;
             acc += a[j] * b[idx];
         }
         out[k] = acc;

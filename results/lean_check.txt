@@ -1,0 +1,4 @@
+Lean 4.12.0 check of formal/hydra/HydraSpec.lean (core Lean, no Mathlib)
+command: lean formal/hydra/HydraSpec.lean
+result: exit 0, no errors, no 'sorry' warnings
+checked: cconv_length; cconv [1,2,3] [4,5,6] = [31,31,28] (decide); delta identity (decide); commutativity instance (decide); parse/serialize roundtrip; replay_rejected; fresh_accepted; nonce injectivity + distinctness

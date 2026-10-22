@@ -1,0 +1,13 @@
+PASS sha256(abc)
+PASS hkdf rfc5869 case1
+PASS chacha20 block A.1
+PASS poly1305 rfc8439 2.5.2
+PASS aead rfc8439 2.8.2 tag
+PASS aead rfc8439 2.8.2 ct head
+PASS aead roundtrip
+optical(sim) minent/byte= 7.642 lag1=-0.0030 maxbias=0.0011
+csprng       minent/byte= 7.642 lag1= 0.0006 maxbias=0.0011
+challenge_fresh_accept_and_verify=T
+challenge_replay_rejected=T
+tampered_ciphertext_rejected=T
+selftest_failures=0

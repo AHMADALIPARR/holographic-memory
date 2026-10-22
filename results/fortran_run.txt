@@ -1,0 +1,15 @@
+HYDRA Fortran kernels run (gfortran 13.3.0, BLAS/LAPACK system libs, 2026-10-22)
+refcheck_max_abs=  30.2156140
+bind 1 expect 2 cos= 0.34408 got=2
+bind 2 expect 4 cos= 0.32618 got=4
+bind 3 expect 6 cos= 0.33048 got=6
+bind 4 expect 8 cos= 0.33255 got=8
+bind 5 expect 10 cos= 0.32990 got=10
+bind 6 expect 12 cos= 0.33189 got=12
+bind 7 expect 14 cos= 0.33748 got=14
+bind 8 expect 16 cos= 0.33408 got=16
+hrr_recovered=8/8
+frame 1 mean=  1.00000 var=  0.12563 max=  3.21065
+frame 2 mean=  1.00000 var=  0.12326 max=  3.10420
+frame 3 mean=  1.00000 var=  0.12525 max=  3.11105
+hydra_driver: done

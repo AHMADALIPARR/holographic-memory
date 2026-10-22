@@ -1,0 +1,15 @@
+HYDRA holographic watermark - MATLAB/Octave run
+host: SIMULATED detector frame 128x128, payload 32 bits, key 4242
+band coeffs: 4928, embed PSNR: 54.9 dB
+
+attack          BER   detector
+clean         0.000     0.0577
+crop-half     0.000   921.3622
+noise         0.062     0.0243
+quantize16    0.000     0.0438
+wrong-key     0.375     0.0093
+
+note: crop-half is read by the joint least-squares detector
+(hydra_wm_extract_ls; low-frequency nuisance basis); its detector
+statistic is in raw template-amplitude units, not the correlator
+units of the other rows. BER is comparable across all rows.

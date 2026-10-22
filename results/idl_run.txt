@@ -1,0 +1,8 @@
+--- GDL GDL - GNU Data Language, Version 1.0.4 ---
+% Compiled module: HYDRA_SESSION.
+% Compiled module: HYDRA_PHASE_SCREEN.
+% Compiled module: HYDRA_PROPAGATE.
+same-state t=0.00 mean= 1.00000 var= 0.11506 max= 3.18879
+same-state t=0.35 mean= 1.00000 var= 0.12033 max= 3.15083
+other-state t=0.00 mean= 1.00000 var= 0.12126 max= 3.30814
+gdl exit: 0

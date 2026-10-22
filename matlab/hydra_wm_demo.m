@@ -15,6 +15,10 @@
 %                  detector statistic near zero)
 %
 % Writes the table to ../results/watermark_matlab.txt and prints it.
+% This file is a function, like every other .m file in this directory;
+% run it as hydra_wm_demo() from the MATLAB or Octave prompt.
+
+function hydra_wm_demo()
 
 here = fileparts(mfilename('fullpath'));
 addpath(here);

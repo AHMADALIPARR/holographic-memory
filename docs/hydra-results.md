@@ -4,9 +4,16 @@ All runs executed on the build VM (2 cores, 7 GB RAM) on 2026-10-22.
 All optical data is SIMULATED (see docs/HYDRA.md for the honesty
 contract). Raw logs are in `results/`.
 
-## 1. HRR engine (repository Rust crate, after labeled repairs)
+## 1. HRR engine (Rust functor layer + WAT arithmetic kernels)
 
-`cargo test --release`: 5 passed, 0 failed.
+The crate's arithmetic now lives in `wasm/hrr_kernels.wat`,
+executed by a wasmi host; the Rust layer keeps the functors and
+f64 plumbing (owner's direction: assembly takes over, Rust keeps
+the functors and f64). Verification that the takeover changed
+nothing numerically: `cargo test --release` 5 passed, 0 failed,
+and the demo output below is bit-identical to the pure-Rust run
+(same 16 significant digits on every recovered binding; the FFT
+agreement figure is unchanged at 2.05e-12).
 `cargo run --release` (excerpt, full log in results/engine_run.txt):
 
 ```
@@ -96,10 +103,21 @@ exposed the Rust underflow), delta identity and commutativity
 instances, serialization round trip, replay rejection, nonce
 uniqueness. Log: results/lean_check.txt.
 
-The pre-existing formal/ files (Convolution, Correlation,
-MemoryLaws, Mathlib-based) are the subject of a separate completion
-pass ordered by the repository owner (full formalization, no
-sketch files); their elaboration status is reported with that pass.
+The Mathlib-based files (formal/Convolution.lean,
+formal/Correlation.lean, formal/MemoryLaws.lean) are completed
+(2026-10-22 completion pass) and checked with Lean 4.36.0-rc1 +
+Mathlib (imports narrowed to the modules used; each file checks
+in seconds, exit 0, no sorry — log: results/lean_check_formal.txt).
+Defects found in the sketches and repaired, labeled in-file: the
+convolution index used truncated Nat subtraction (collapsed to 0
+instead of wrapping at k < j); the correlation index was
+involuted, and its delta example was false as stated for that
+index (at d = 3, a = [0, 1, 0], it gives 0 at k = 1, not 1) — with
+the corrected index b (j - k) the example's statement holds and
+is proved. Proved: distributivity (the sketches' two examples,
+verbatim), left distributivity, zero and scalar laws, delta
+identity laws, commutativity, associativity, correlation =
+convolution with involuted operand, superposition laws.
 
 ## 6. Ada/SPARK control logic (GNAT 13.3.0, contracts enabled)
 
@@ -108,21 +126,29 @@ challenge rejected; nonces issued strictly increasing (1, 2);
 counter exhaustion transitions to Rekey_Required and issues no
 nonce (no wrap).
 
-## 7. IDL optical pipeline
+## 7. IDL optical pipeline (executed under GDL 1.0.4)
 
-idl/ contains the full IDL/GDL procedures (phase screen, angular
-spectrum propagation, session experiment). No GDL package is
-available for this platform (absent from conda-forge under both
-names; distribution package lists were unreachable), so the IDL
-code is delivered as source; the identical pipeline is executed
-and measured in Fortran (sections 2–3).
+idl/ contains the IDL procedures (phase screen, angular spectrum
+propagation, session experiment). They were executed with GNU
+Data Language 1.0.4 (log: results/idl_run.txt): all three modules
+compile, and the session experiment reproduces the Fortran path's
+behavior — propagated mean intensity conserved at 1.00000 across
+sessions, same-state variance 0.11506 at t = 0 evolving to 0.12033
+at t = 0.35, other-state variance distinct (0.12126).
 
-## 8. Outstanding completions (owner-ordered: no placeholder dirs)
+## 8. Completion pass (owner-ordered: no placeholders)
 
-- cuda/: CUDA kernel implementation (source) with host driver.
-- benchmarks/: benchmark harness with measured output.
-- examples/: runnable example against the crate API.
-- formal/: full formalization replacing the sketch files.
+All four items ordered on 2026-10-22 are complete locally and
+land as a follow-up commit (nothing in sections 1–7 depends on
+them):
 
-These land as a follow-up commit; nothing in sections 1–7 depends
-on them.
+- cuda/: full CUDA kernel implementation (source) with
+  self-verifying host driver — §2 note in cuda/README.md; not
+  compiled here (the VM's package lock is held by the runtime's
+  own replay and the box has no GPU to run it regardless).
+- benchmarks/: harness written against the real kernel API and
+  executed — §1 table's chirp-z and capacity numbers are its
+  output (results/benchmark.txt).
+- examples/: runnable associative-memory example, executed,
+  3/3 retrievals (results/example_run.txt).
+- formal/: full formalization replacing the sketch files — §5.

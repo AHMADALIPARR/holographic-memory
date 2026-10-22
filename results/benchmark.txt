@@ -1,0 +1,26 @@
+HYDRA benchmark harness (Fortran kernels, cpu_time, median of 5)
+
+direct O(n^2) convolution vs chirp-z hrr_bind:
+     n     direct_ms    chirp-z_ms
+   256       0.098        0.022
+  1024       1.684        0.098
+  4096      27.253        0.764
+
+capacity sweep at D=10000 (chirp-z bind, cleanup_search):
+  bindings   recovered   mean_cosine   bind_ms   cleanup_ms
+         4          4       0.4490     95.859     107.827
+         8          8       0.3333    195.581     213.144
+        12         12       0.2764    289.020     313.232
+        16         16       0.2431    387.271     433.495
+        20         20       0.2197    477.646     521.010
+        24         24       0.2017    567.869     619.672
+        28         28       0.1871    668.827     732.664
+        32         32       0.1747    770.634     853.432
+
+corruption sweep at D=1024, 4 bindings (zeroed fraction of the trace):
+  zero_frac   recovered_of_4   probe_cosine
+      0.00              4         0.4614
+      0.25              4         0.4111
+      0.50              4         0.3456
+      0.75              4         0.2895
+      1.00              0        -2.0000

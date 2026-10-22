@@ -35,3 +35,13 @@ The benchmarking goals are to measure:
 - memory capacity before retrieval fails
 
 These measurements are designed to remain reproducible across runs and architectures.
+
+## Documents in this directory
+
+- `HYDRA.md` — the PROJECT HYDRA design: pipeline, chamber,
+  optical model, language architecture, and the honesty contract
+  for simulated data.
+- `hydra-results.md` — every measured result for the HYDRA
+  layers, with the raw logs under `results/`.
+- The benchmark measurements themselves live in `benchmarks/`
+  (harness) and `results/benchmark.txt` (output).

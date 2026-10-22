@@ -1,18 +1,33 @@
-# CUDA and GPU Notes
+# CUDA
 
-This directory is reserved for optional GPU acceleration experiments.
+`hrr_kernels.cu` is the GPU implementation of the engine's
+arithmetic in double precision: direct circular convolution and
+correlation kernels, superposition accumulation, block-reduction
+dot products for cleanup, and an FFT convolution path (bit-reversal
+kernel plus one butterfly launch per stage, mirroring the CPU FFT).
 
-## Purpose
+The host driver in the same file is self-verifying. It checks the
+GPU direct convolution against a CPU direct convolution and the
+GPU FFT convolution against both, then runs the retrieval
+experiment (D = 1024, 16-symbol codebook, 4 superposed bindings)
+and prints recovered symbols with cosines, exiting nonzero unless
+all bindings are recovered.
 
-The core CPU implementation is complete and tested. GPU acceleration may be added later for direct or FFT-based convolution kernels.
+Build and run (requires a CUDA toolkit and a GPU):
 
-## Current status
+```bash
+make
+./hrr_kernels
+```
 
-- CPU direct convolution implemented
-- CPU FFT path implemented
-- CUDA/PTX acceleration not required for the base system
-- GPU path remains optional and should only be added when performance data justify it
+The codebook recipe (double-precision LCG, modulus 2^32,
+multiplier 1664525, Box-Muller, unit-normalized columns) matches
+the Fortran and MATLAB layers so results are comparable across
+implementations. The Makefile targets sm_70, sm_80 and sm_87;
+override `ARCH` for other devices.
 
-## Notes
-
-A CUDA path should be treated as an optimization for large vectors and high throughput, not as a replacement for the correctness of the CPU implementation.
+Execution status: this sandbox has no GPU, so the program is
+delivered as complete source; it is compiled with nvcc wherever a
+toolkit is available and run on any CUDA device. The CPU layers
+(Fortran, Rust+WAT) carry the measured results in
+`docs/hydra-results.md`.

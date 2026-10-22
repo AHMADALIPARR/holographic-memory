@@ -1,0 +1,154 @@
+Formal check — Lean toolchain leanprover/lean4:v4.36.0-rc1, Mathlib (lake cache), narrowed imports
+=== Convolution.lean ===
+Convolution.lean:158:10: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:160:10: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:170:10: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:172:10: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:177:10: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:179:10: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:185:10: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:187:10: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:194:8: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:196:10: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:198:12: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:200:14: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:202:14: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:204:12: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:206:14: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:208:14: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:210:10: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:212:12: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:214:14: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:216:14: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:218:12: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:220:14: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:222:14: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:224:8: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:226:10: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:228:12: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:230:14: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:232:14: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:234:12: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:236:14: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:238:14: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:240:10: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:242:12: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:244:14: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:246:14: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:248:12: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:250:14: warning: `if_pos` has been deprecated: Use `ite_eq_left` instead
+
+  i̵f̵_̵p̵o̵s̵i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+Convolution.lean:252:14: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+Convolution.lean:260:42: warning: This simp argument is unused:
+  add_mul
+
+
+Convolution.lean:265:42: warning: This simp argument is unused:
+  add_mul
+
+
+Convolution.lean:272:51: warning: This simp argument is unused:
+  mul_add
+
+
+Convolution.lean:277:51: warning: This simp argument is unused:
+  mul_add
+
+
+Convolution.lean:315:17: warning: This simp argument is unused:
+  sub_self_fin
+
+
+Convolution.lean:329:17: warning: This simp argument is unused:
+  sub_self_fin
+
+
+exit: 0
+=== Correlation.lean ===
+Correlation.lean:128:10: warning: This simp argument is unused:
+  sub_self_fin
+
+  [apply] simp
+
+Correlation.lean:157:56: warning: This simp argument is unused:
+  mul_add
+
+
+exit: 0
+=== MemoryLaws.lean ===
+exit: 0

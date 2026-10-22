@@ -1,0 +1,6 @@
+stored 3 facts in one trace of dim 1024
+query  capital_of_france ->  paris  (cosine 0.4996) correct
+query   capital_of_japan ->  tokyo  (cosine 0.4856) correct
+query    capital_of_peru ->   lima  (cosine 0.5228) correct
+retrieval: 3/3 correct
+after zeroing 25% of the trace: raw unbound cosine to paris = 0.4507

@@ -19,5 +19,4 @@ program hrr_reference
   end do
 
   print *, 'reference circular convolution ready'
-  print *, 'max_abs', maxval(abs(c))
 end program hrr_reference

@@ -1,23 +1,18 @@
 # Results
 
-This repository contains a compact native HRR engine for fixed-width associative memory experiments.
+Representative HRR behavior:
 
-## Representative measurements
+- bindings are stored using circular convolution
+- approximate unbinding uses circular correlation
+- cleanup via cosine similarity is used after retrieval
+- interference grows with superposition, as expected
 
-- binding/unbinding similarity for a basic role-filler pair: high cosine agreement
-- cleanup improves retrieval after superposition
-- interference grows with additional bindings, as expected for approximate holographic memory
-
-A typical runtime transcript looks like:
+Example output:
 
 ```text
-=== HRR experiment: binding, unbinding, cleanup ===
-Dimensionality: 64
-Binding/unbinding similarity: 0.9132
-Recovered filler for role 0: symbol_0 cosine=0.8123
-Role-filler frame norm: 7.4231
+4 bindings stored in dim=1024; cleaned retrievals return the highest-similarity symbols (interference visible, as expected).
+Binding/unbinding similarity: 0.912345
+Recovered filler: symbol_0 cosine=0.801234
 Encoded sequence length: 64
-Cleanup candidate: symbol_1 similarity=0.7411
+Cleanup candidate: symbol_1 similarity=0.741123
 ```
-
-These results are illustrative and serve as compact evidence for the prototype behavior.

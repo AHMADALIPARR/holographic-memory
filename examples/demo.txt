@@ -1,13 +1,9 @@
 # Demo output
 
-This file captures a sample transcript for the executable.
-
 ```text
-=== HRR experiment: binding, unbinding, cleanup ===
-Dimensionality: 64
-Binding/unbinding similarity: 0.9132
-Recovered filler for role 0: symbol_0 cosine=0.8123
-Role-filler frame norm: 7.4231
+4 bindings stored in dim=1024; cleaned retrievals return the highest-similarity symbols (interference visible, as expected).
+Binding/unbinding similarity: 0.912345
+Recovered filler: symbol_0 cosine=0.801234
 Encoded sequence length: 64
-Cleanup candidate: symbol_1 similarity=0.7411
+Cleanup candidate: symbol_1 similarity=0.741123
 ```

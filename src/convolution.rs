@@ -1,34 +1,36 @@
 use crate::Vector;
 
-pub fn circular_convolution(left: &[f64], right: &[f64]) -> Vec<f64> {
-    assert_eq!(left.len(), right.len());
-    let dim = left.len();
-    let mut out = vec![0.0; dim];
+pub fn circular_convolution(a: &[f64], b: &[f64]) -> Vec<f64> {
+    assert_eq!(a.len(), b.len());
+    let n = a.len();
+    let mut out = vec![0.0; n];
 
-    for k in 0..dim {
+    for k in 0..n {
         let mut acc = 0.0;
-        for j in 0..dim {
-            let idx = (k - j).rem_euclid(dim);
-            acc += left[j] * right[idx];
+        for j in 0..n {
+            let idx = (k - j).rem_euclid(n);
+            acc += a[j] * b[idx];
         }
         out[k] = acc;
     }
+
     out
 }
 
-pub fn circular_correlation(left: &[f64], right: &[f64]) -> Vec<f64> {
-    assert_eq!(left.len(), right.len());
-    let dim = left.len();
-    let mut out = vec![0.0; dim];
+pub fn circular_correlation(a: &[f64], b: &[f64]) -> Vec<f64> {
+    assert_eq!(a.len(), b.len());
+    let n = a.len();
+    let mut out = vec![0.0; n];
 
-    for k in 0..dim {
+    for k in 0..n {
         let mut acc = 0.0;
-        for j in 0..dim {
-            let idx = (j + k).rem_euclid(dim);
-            acc += left[j] * right[idx];
+        for j in 0..n {
+            let idx = (j + k).rem_euclid(n);
+            acc += a[j] * b[idx];
         }
         out[k] = acc;
     }
+
     out
 }
 
